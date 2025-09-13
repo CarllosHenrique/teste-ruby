@@ -1,0 +1,70 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold"><%= t("clients.title_index") %></h1>
+  <div class="flex items-center gap-2">
+    <%= button_to t("nav.bill_today"),
+                  billing_run_today_path,
+                  method: :post,
+                  class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5" %>
+
+    <%= link_to t("clients.title_new"),
+                new_client_path,
+                class: "py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100" %>
+  </div>
+</div>
+
+<div class="relative overflow-hidden bg-white shadow-sm ring-1 ring-gray-200 rounded-xl hidden lg:block">
+  <table class="w-full text-sm text-left text-gray-700">
+    <thead class="text-xs uppercase bg-gray-50 text-gray-600">
+    <tr>
+      <th scope="col" class="px-6 py-3"><%= t("clients.table.name") %></th>
+      <th scope="col" class="px-6 py-3"><%= t("clients.table.email") %></th>
+      <th scope="col" class="px-6 py-3"><%= t("clients.table.due_day") %></th>
+      <th scope="col" class="px-6 py-3"><%= t("clients.table.payment") %></th>
+      <th scope="col" class="px-6 py-3 text-right"><span class="sr-only"><%= t("clients.table.actions") %></span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @clients&.each do |c| %>
+      <tr class="border-t border-gray-100 hover:bg-gray-50">
+        <td class="px-6 py-4"><%= c.name %></td>
+        <td class="px-6 py-4"><%= c.email %></td>
+        <td class="px-6 py-4"><%= c.due_day %></td>
+        <td class="px-6 py-4"><%= (PaymentsRegistry.label_for(c.payment_method_key) rescue c.payment_method_key.to_s.titleize) %></td>
+        <td class="px-6 py-4">
+          <div class="flex justify-end gap-2">
+            <%= link_to c,
+                        class: "px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-100",
+                        title: t("clients.actions.show"),
+                        aria: { label: t("clients.actions.show") } do %>
+              <svg class="w-5 h-5 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+              </svg>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="lg:hidden">
+  <ul role="list" class="divide-y divide-gray-200 rounded-lg bg-white shadow-sm ring-1 ring-gray-200">
+    <% @clients.each do |c| %>
+      <li class="p-4">
+        <div class="flex items-center justify-between">
+          <div class="text-sm font-medium text-gray-900"><%= c.name %></div>
+          <div class="text-xs text-gray-500"><%= (PaymentsRegistry.label_for(c.payment_method_key) rescue c.payment_method_key.to_s.titleize) %></div>
+        </div>
+        <div class="mt-1 text-xs text-gray-500"><%= c.email %></div>
+        <div class="mt-2 text-sm text-gray-700">
+          <%= t("clients.table.due_day") %>: <%= c.due_day %>
+        </div>
+        <div class="mt-2 flex justify-end">
+          <%= link_to t("common.show"), c,
+                      class: "px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 text-sm" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

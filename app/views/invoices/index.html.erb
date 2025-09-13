@@ -1,0 +1,71 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold"><%= t("invoices.title_index") %></h1>
+</div>
+
+<div class="relative overflow-hidden bg-white shadow-sm ring-1 ring-gray-200 rounded-xl">
+  <div class="hidden lg:block">
+    <table class="w-full text-sm text-left text-gray-700">
+      <thead class="text-xs uppercase bg-gray-50 text-gray-600">
+      <tr>
+        <th scope="col" class="px-6 py-3"><%= t("invoices.table.client") %></th>
+        <th scope="col" class="px-6 py-3"><%= t("invoices.table.month_year") %></th>
+        <th scope="col" class="px-6 py-3"><%= t("invoices.table.method") %></th>
+        <th scope="col" class="px-6 py-3"><%= t("invoices.table.status") %></th>
+        <th scope="col" class="px-6 py-3"><%= t("invoices.table.error") %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @invoices.each do |inv| %>
+        <tr class="border-t border-gray-100 hover:bg-gray-50">
+          <td class="px-6 py-4"><%= inv.client.name %></td>
+          <td class="px-6 py-4"><%= t("invoices.month_year", month: "%02d" % inv.month, year: inv.year) %></td>
+          <td class="px-6 py-4"><%= (PaymentsRegistry.label_for(inv.payment_method_key) rescue inv.payment_method_key.to_s.titleize) %></td>
+          <td class="px-6 py-4">
+            <% badge =
+                 case inv.status
+                 when "paid"   then "bg-green-100 text-green-800"
+                 when "failed" then "bg-red-100 text-red-800"
+                 else                "bg-gray-100 text-gray-800"
+                 end %>
+            <span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-medium <%= badge %>">
+              <%= t("invoices.status.#{inv.status}") %>
+            </span>
+          </td>
+          <td class="px-6 py-4"><%= inv.error_message&.truncate(80) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Layout para Celular e Tablet (visível apenas em telas pequenas) -->
+  <div class="p-4 lg:hidden">
+    <div class="space-y-4">
+      <% @invoices.each do |inv| %>
+        <div class="bg-gray-50 rounded-lg p-4 shadow-sm border border-gray-100">
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-sm font-semibold text-gray-900">
+              <%= inv.client.name %>
+            </div>
+            <% badge =
+                 case inv.status
+                 when "paid"   then "bg-green-100 text-green-800"
+                 when "failed" then "bg-red-100 text-red-800"
+                 else                "bg-gray-100 text-gray-800"
+                 end %>
+            <span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-medium <%= badge %>">
+              <%= t("invoices.status.#{inv.status}") %>
+            </span>
+          </div>
+
+          <div class="space-y-1 text-sm text-gray-600">
+            <p><span class="font-medium text-gray-700"><%= t("invoices.table.month_year") %>:</span> <%= t("invoices.month_year", month: "%02d" % inv.month, year: inv.year) %></p>
+            <p><span class="font-medium text-gray-700"><%= t("invoices.table.method") %>:</span> <%= (PaymentsRegistry.label_for(inv.payment_method_key) rescue inv.payment_method_key.to_s.titleize) %></p>
+            <p><span class="font-medium text-gray-700"><%= t("invoices.table.error") %>:</span> <%= inv.error_message&.truncate(80) %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

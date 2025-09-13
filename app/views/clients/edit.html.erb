@@ -1,0 +1,14 @@
+<% content_for :title, t("clients.title_edit") %>
+
+<div class="mx-auto max-w-2xl">
+  <h1 class="mb-6 text-2xl font-semibold text-gray-900"><%= t("clients.title_edit") %></h1>
+
+  <%= render "form", client: @client %>
+
+  <div class="mt-6 flex items-center gap-3">
+    <%= link_to t("common.show"), @client,
+                class: "px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 text-sm" %>
+    <%= link_to t("common.back"), clients_path,
+                class: "px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 text-sm" %>
+  </div>
+</div>

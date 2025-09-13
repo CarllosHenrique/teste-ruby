@@ -1,0 +1,37 @@
+<div id="<%= dom_id client %>" class="mb-4" data-controller="sweetalert">
+  <div class="w-full rounded-xl border border-gray-200 bg-white shadow-sm">
+    <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+      <h3 class="text-base font-semibold text-gray-900">
+        <%= client.name %>
+      </h3>
+      <% pm_label = (PaymentsRegistry.label_for(client.payment_method_key) rescue client.payment_method_key.to_s.titleize) %>
+      <span class="inline-flex items-center rounded-md bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
+        <%= pm_label %>
+      </span>
+    </div>
+
+    <!-- body -->
+    <div class="px-6 py-5 text-sm text-gray-700">
+      <dl class="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-x-6">
+        <div>
+          <dt class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-500"><%= t("clients.card.email") %></dt>
+          <dd class="font-medium text-gray-900"><%= client.email %></dd>
+        </div>
+
+        <div>
+          <dt class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-500"><%= t("clients.card.due_day") %></dt>
+          <dd class="font-medium text-gray-900"><%= client.due_day %></dd>
+        </div>
+
+        <div class="md:col-span-2">
+          <dt class="mb-1 text-xs font-medium uppercase tracking-wide text-gray-500"><%= t("clients.card.method_key") %></dt>
+          <dd class="font-medium text-gray-900">
+            <code class="rounded bg-gray-50 px-1.5 py-0.5 text-[11px] text-gray-700">
+              <%= pm_label %>
+            </code>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

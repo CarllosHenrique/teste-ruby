@@ -1,0 +1,70 @@
+en:
+  app:
+    title: "Monde Billing"
+  nav:
+    clients: "Clients"
+    invoices: "Invoices"
+    bill_today: "Run billing today"
+  invoices:
+    title_index: "Invoices"
+    table:
+      client: "Client"
+      month_year: "Month/Year"
+      method: "Method"
+      status: "Status"
+      error: "Error"
+    month_year: "%{month}/%{year}"
+    status:
+      paid: "Paid"
+      pending: "Pending"
+      failed: "Failed"
+  alerts:
+    destroy:
+      title: "Are you sure?"
+      text: "This action cannot be undone!"
+      confirm: "Yes, delete it!"
+      cancel: "Cancel"
+  clients:
+    title_edit: "Edit Client"
+    title_index: "Clients"
+    title_new: "New client"
+    table:
+      name: "Name"
+      email: "Email"
+      due_day: "Due day"
+      payment: "Payment"
+      actions: "Actions"
+    actions:
+      show: "Show"
+    card:
+      email: "Email"
+      due_day: "Due day"
+      method_key: "Method key"
+    form:
+      name: "Name"
+      email: "Email"
+      due_day: "Due day"
+      hint_due_day: "Use the day of the month (1–31)."
+      payment_method: "Payment method"
+      save: "Save"
+    flash:
+      created: "Client was successfully created."
+      updated: "Client was successfully updated."
+      destroyed: "Client was successfully destroyed."
+  common:
+    show: "Show"
+    edit: "Edit"
+    back: "Back"
+    destroy: "Delete"
+    confirm_destroy: "Are you sure?"
+  billing:
+    run_today:
+      success: "Today's billing has been executed (see logs)."
+  payments:
+    methods:
+      boleto: "Boleto"
+      credit_card: "Credit card"
+      deposit: "Deposit"
+      pix: "Pix"
+    generic:
+      log: "[PAYMENT] %{method} processed for %{client} (inv #%{invoice_id})"

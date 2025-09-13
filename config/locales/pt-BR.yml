@@ -1,0 +1,70 @@
+pt-BR:
+  app:
+    title: "Monde Billing"
+  nav:
+    clients: "Clientes"
+    invoices: "Faturas"
+    bill_today: "Faturar hoje"
+  invoices:
+    title_index: "Faturas"
+    table:
+      client: "Cliente"
+      month_year: "Mês/Ano"
+      method: "Método"
+      status: "Status"
+      error: "Erro"
+    month_year: "%{month}/%{year}"
+    status:
+      paid: "Paga"
+      pending: "Pendente"
+      failed: "Falhou"
+  alerts:
+    destroy:
+      title: "Tem certeza?"
+      text: "Esta ação não poderá ser desfeita!"
+      confirm: "Sim, excluir!"
+      cancel: "Cancelar"
+  clients:
+    title_edit: "Editar Cliente"
+    title_index: "Clientes"
+    title_new: "Novo cliente"
+    table:
+      name: "Nome"
+      email: "Email"
+      due_day: "Vencimento"
+      payment: "Pagamento"
+      actions: "Ações"
+    actions:
+      show: "Mostrar"
+    card:
+      email: "Email"
+      due_day: "Dia de vencimento"
+      method_key: "Chave do método"
+    form:
+      name: "Nome"
+      email: "Email"
+      due_day: "Dia de vencimento"
+      hint_due_day: "Use o dia do mês (1–31)."
+      payment_method: "Forma de pagamento"
+      save: "Salvar"
+    flash:
+      created: "Cliente criado com sucesso."
+      updated: "Cliente atualizado com sucesso."
+      destroyed: "Cliente removido com sucesso."
+  common:
+    show: "Mostrar"
+    edit: "Editar"
+    back: "Voltar"
+    destroy: "Excluir"
+    confirm_destroy: "Tem certeza?"
+  billing:
+    run_today:
+      success: "Faturamento de hoje executado (veja os logs)."
+  payments:
+    methods:
+      boleto: "Boleto"
+      credit_card: "Cartão de crédito"
+      deposit: "Depósito"
+      pix: "Pix"
+    generic:
+      log: "[PAGAMENTO] %{method} processado p/ %{client} (fatura #%{invoice_id})"

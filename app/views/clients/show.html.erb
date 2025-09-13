@@ -1,0 +1,26 @@
+<% content_for :title, @client.name %>
+
+<div class="mx-auto max-w-2xl">
+  <div class="mt-6 flex justify-end items-center gap-3 mb-4">
+    <%= link_to t("common.edit"), edit_client_path(@client),
+                class: "px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-sm" %>
+
+    <%= button_to t("common.destroy"),
+                  @client,
+                  method: :delete,
+                  class: "px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm",
+                  data: {
+                    controller: "sweetalert",
+                    action: "click->sweetalert#confirmDestroy",
+                    confirm_title: t("alerts.destroy.title"),
+                    confirm_text:  t("alerts.destroy.text"),
+                    confirm_button: t("alerts.destroy.confirm"),
+                    cancel_button:  t("alerts.destroy.cancel")
+                  } %>
+
+    <%= link_to t("common.back"), clients_path,
+                class: "px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 text-sm" %>
+
+  </div>
+  <%= render @client %>
+</div>
